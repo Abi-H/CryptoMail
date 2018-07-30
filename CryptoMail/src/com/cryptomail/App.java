@@ -1,3 +1,5 @@
+// CryptoMail
+
 package com.cryptomail;
 
 import java.util.Scanner;
