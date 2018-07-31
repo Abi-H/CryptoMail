@@ -1,0 +1,25 @@
+#dropdown_actions{
+		color:#000;
+		float: left;
+}
+#dropdown_chosen{
+	color:#000;
+	
+}
+#compose_button{
+	margin-right: 10px;
+}
+.unread_message{
+	font-weight: bold;
+}
+.centered{
+	 position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+
+}
