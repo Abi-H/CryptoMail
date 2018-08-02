@@ -1,3 +1,12 @@
+#checkbox_col{
+	
+width: 10px;
+color:#fff;
+}
+
+
+
+
 #dropdown_actions{
 		color:#000;
 		float: left;
@@ -9,6 +18,7 @@
 #compose_button{
 	margin-right: 10px;
 }
+
 .unread_message{
 	font-weight: bold;
 }
