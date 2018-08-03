@@ -27,14 +27,14 @@
  <form action="/action_page.php">
   <div class="form-group" class="col-sm-10">
     <label for="email">Email address:</label>
-    <input type="email" class="form-control" id="email">
+    <input type="email" class="form-control" id="email" name="Email">
   </div>
   <div class="form-group">
     <label for="pwd">Password:</label>
-    <input type="password" class="form-control" id="pwd">
+    <input type="password" class="form-control" id="pwd" name="Password">
   </div>
  
-  <button type="submit" class="btn btn-default">Submit</button>
+  <button type="submit" class="btn btn-default" name= "Submit_button">Submit</button>
 </form>
   </div>
   <!--================ -->
