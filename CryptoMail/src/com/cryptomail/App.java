@@ -14,7 +14,8 @@ public class App {
 		
 		login();
 		printMenu();
-		char choice = getInput();
+		//char choice = getInput();
+		char choice = '2';
 
 		while (choice != '0') {
 
@@ -58,7 +59,7 @@ public class App {
 
 	public static char getInput() {
 		Scanner in = new Scanner(System.in);
-		char input = in.next().charAt(0);
+		char input = in.nextLine().charAt(0);
 		in.close();
 		return input;
 	}
