@@ -52,7 +52,7 @@
 	<label class="col-sm-2 control-label" for="inputGroupFile01">Choose file:</label>
 		<div class="col-sm-10 col-sm-offset-2">
 			<div class="custom-file">
-    <input type="file" class="custom-file-input" id="inputGroupFile01">
+    <input type="file" class="custom-file-input" id="inputGroupFile01" name="File_Attachment">
     
   </div>
 </div>
@@ -61,7 +61,7 @@
 	
 	<div class="form-group">
 		<div class="col-sm-10 col-sm-offset-2">
-			<input id="submit" name="submit" type="submit" value="Send" class="btn btn-primary">
+			<input id="submit" name="Submit_Email" type="submit" value="Send" class="btn btn-primary">
 		</div>
 	</div>
 	<div class="form-group">
