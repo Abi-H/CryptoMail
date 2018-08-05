@@ -65,7 +65,7 @@
             <td>Not so important message</td>
         </tr>
         <tr>
-            <td><div class="checkbox checkbox-success"><input type="checkbox" id="checkbox3 class="styled""><label></label></div></td>
+            <td><div class="checkbox checkbox-success"><input type="checkbox" id="checkbox3" class="styled"><label></label></div></td>
             <td>Peter</td>
             <td>12.01.2018</td>
             <td>Very important message</td>

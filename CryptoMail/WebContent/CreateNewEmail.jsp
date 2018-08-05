@@ -23,13 +23,13 @@
 	<div class="form-group">
 		<label for="name" class="col-sm-2 control-label">To:</label>
 		<div class="col-sm-10">
-			<input type="email" class="form-control" id="to" name="to"  value="">
+			<input type="email" class="form-control" id="to" name="recipient"  value="">
 		</div>
 	</div>
 	<div class="form-group">
 		<label for="from" class="col-sm-2 control-label">From:</label>
 		<div class="col-sm-10">
-			<input type="email" class="form-control" id="from" name="from" value="">
+			<input type="email" class="form-control" id="from" name="sender" value="">
 		</div>
 	</div>
 	
@@ -43,7 +43,7 @@
 	<div class="form-group">
 		<label for="message" class="col-sm-2 control-label">Message:</label>
 		<div class="col-sm-10">
-			<textarea class="form-control" rows="4" name="message"></textarea>
+			<textarea class="form-control" rows="4" name="body"></textarea>
 		</div>
 	</div>
 	
@@ -72,6 +72,21 @@
 	</div>
 </form>
  
+<% 
+	 String sender = request.getParameter("sender");
+	 String recipient = request.getParameter("recipient");
+	 String subject = request.getParameter("subject");
+	 String body = request.getParameter("body");
+	 
+try {
+	Class.forName("com.mysql.jdbc.Driver");
+	Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cryptomail");
+	Statement stmt = conn.createStatement();
+	
+	stmt.executeUpdate("insert into email"(sender,recipient,subject,body) values ('"+sender+"','"+recipient+"','"+subject'",'"+body+"')");
+}
+
+%>
 
 
 </head>

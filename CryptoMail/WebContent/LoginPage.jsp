@@ -28,11 +28,11 @@
  <form action="/action_page.php">
   <div class="form-group" class="col-sm-10">
     <label for="email">Email address:</label>
-    <input type="email" class="form-control" id="email" placeholder="username">
+    <input type="email" class="form-control" id="email" name="username">
   </div>
   <div class="form-group">
     <label for="pwd">Password:</label>
-    <input type="password" class="form-control" id="pwd" placeholder="password">
+    <input type="password" class="form-control" id="pwd" name="password">
   </div>
  
   <button type="submit" class="btn btn-default">Submit</button>
@@ -52,7 +52,7 @@ ResultSet resultSet= null;
 
 String driverName = "com.mysql.jdbc.Driver";
 
-String url = "jdbc:mysql://localhost:3306/record";
+String url = "jdbc:mysql://localhost:3306/cryptomail";
 
 String user = "root";
 
