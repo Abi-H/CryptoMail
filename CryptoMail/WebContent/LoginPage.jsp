@@ -1,4 +1,5 @@
 <%@ page language="java" %>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -27,18 +28,108 @@
  <form action="/action_page.php">
   <div class="form-group" class="col-sm-10">
     <label for="email">Email address:</label>
-    <input type="email" class="form-control" id="email">
+    <input type="email" class="form-control" id="email" placeholder="username">
   </div>
   <div class="form-group">
     <label for="pwd">Password:</label>
-    <input type="password" class="form-control" id="pwd">
+    <input type="password" class="form-control" id="pwd" placeholder="password">
   </div>
  
   <button type="submit" class="btn btn-default">Submit</button>
 </form>
   </div>
   <!--================ -->
-  
-  
+
+<%@ page import = "java.sql.*" %>
+
+<%
+
+Connection con= null;
+
+PreparedStatement preparedStatement= null;
+
+ResultSet resultSet= null;
+
+String driverName = "com.mysql.jdbc.Driver";
+
+String url = "jdbc:mysql://localhost:3306/record";
+
+String user = "root";
+
+String password = "";
+
+
+String sql = "select * from user where username=? and password=? ";
+
+
+
+String name = request.getParameter("username");
+
+String password = request.getParameter("password");
+
+if((!(name.equals(null) || name.equals("")) && !(password.equals(null) || 
+password.equals(""))) 
+
+{
+try{
+
+	Class.forName(driverName);
+
+	conn = DriverManager.getConnection(url, user, password);
+
+	preparedStatement = con.prepareStatement(sql);
+
+	preparedStatement.setString(username, username);
+
+	preparedStatement.setString(password, password);
+
+	resultSet = ps.executeQuery();
+
+	if(resultSet.next())
+
+	{ 
+
+	username = rs.getString("name");
+
+	password = rs.getString("password");
+
+	if(name.equals(username) && password.equals(password))
+
+	{
+
+	session.setAttribute("username",username);
+
+	session.setAttribute("usertype", username); 
+
+	response.sendRedirect("View_Email.jsp"); 
+
+	} 
+
+	}
+
+	else
+
+	response.sendRedirect("LoginPage.jsp");
+
+	rs.close();
+
+	ps.close(); 
+
+	}
+
+	catch(SQLException sqe)
+
+	{
+
+	out.println(sqe);
+
+	} 
+
+	}
+
+	else
+
+	{ 
+%>
 </body>
 </html>
