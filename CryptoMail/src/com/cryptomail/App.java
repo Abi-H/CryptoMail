@@ -2,6 +2,8 @@
 
 package com.cryptomail;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Scanner;
 import javax.mail.MessagingException;
 
@@ -10,12 +12,12 @@ public class App {
 	static String username;
 	static String password;
 
-	public static void main(String[] args) throws MessagingException {
+	public static void main(String[] args) throws MessagingException, IOException, SQLException {
 		
 		login();
 		printMenu();
 		//char choice = getInput();
-		char choice = '2';
+		char choice = '3';
 
 		while (choice != '0') {
 
@@ -26,6 +28,8 @@ public class App {
 			case '2':
 				readEmail();
 				break;
+			case '3':
+				storeEmails();
 			case '0':
 				System.out.println("Goodbye.");
 				System.exit(0);
@@ -37,6 +41,12 @@ public class App {
 			printMenu();
 			choice = getInput();
 		}
+	}
+	
+	public static void storeEmails() throws MessagingException, IOException, SQLException {
+		MailService mailService = new MailService();
+		//mailService.login("imap.gmail.com", username, password);
+		mailService.storeEmails(username, password);
 	}
 	
 	public static void login() {
@@ -54,6 +64,7 @@ public class App {
 		System.out.println("+=====================+");
 		System.out.println("\n[1] Send email");
 		System.out.println("[2] Read emails");
+		System.out.println("[3] Store emails in server");
 		System.out.println("[0] Exit");
 	}
 

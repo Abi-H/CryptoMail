@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Welcome to the Crypto Email!</title>
+    <title>Welcome to CryptoMail!</title>
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
      <link href="css/awesome-bootstrap-checkbox.css" rel="stylesheet">
@@ -24,7 +24,7 @@
 	
   <!-- login form -->
   
- <form action="/action_page.php">
+ <form action="${pageContext.request.contextPath}/cryptomail/login" method="GET">
   <div class="form-group" class="col-sm-10">
     <label for="email">Email address:</label>
     <input type="email" class="form-control" id="email" name="Email">

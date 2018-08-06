@@ -2,10 +2,16 @@
 
 package com.cryptomail;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Properties;
 import java.util.Scanner;
 import javax.mail.*;
+import javax.mail.internet.MimeMultipart;
+
+import org.jsoup.Jsoup;
 
 public class MailService {
 	private Session session;
@@ -94,6 +100,61 @@ public class MailService {
 		}
 	}
 
+	public void storeEmails(String username, String password) throws MessagingException, IOException, SQLException {
+		Database db = new Database();
+
+		login("imap.gmail.com", username, password);
+
+		int messageCount = getMessageCount();
+		Message[] messages = getMessages();
+
+		for (int i = 0; i < messageCount; i++) {
+			
+			String sender = messages[i].getFrom()[0].toString();
+			String recipient = username;
+			
+			String subject = "";
+
+			if (messages[i].getSubject() != null) {
+				subject = messages[i].getSubject();
+			} 
+			
+			String body = getBody(messages[i]);
+			
+			Date date = messages[i].getReceivedDate();
+			java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+						
+			db.write(sender, recipient, subject, body, sqlDate);
+		}
+
+	}
+	
+	private String getBody(Message message) throws MessagingException, IOException {
+	    if (message.isMimeType("text/plain")){
+	        return message.getContent().toString();
+	    } else if (message.isMimeType("multipart/*")) {
+	        String result = "";
+	        MimeMultipart mimeMultipart = (MimeMultipart)message.getContent();
+	        
+	        int count = mimeMultipart.getCount();
+	        
+	        for (int i = 0; i < count; i ++){
+	            BodyPart bodyPart = mimeMultipart.getBodyPart(i);
+	            
+	            if (bodyPart.isMimeType("text/plain")){
+	                result = result + "\n" + bodyPart.getContent();
+	                break;  //without break same text appears twice
+	                
+	            } else if (bodyPart.isMimeType("text/html")){
+	                String html = (String) bodyPart.getContent();
+	                result = result + "\n" + Jsoup.parse(html).text();
+	            }
+	        }
+	        return result;
+	    }
+	    return "";
+	}
+
 	public void composeEmail(String sender, String password) {
 		Scanner scanner = new Scanner(System.in);
 		ArrayList<String> recipientList = new ArrayList<>();
@@ -106,13 +167,13 @@ public class MailService {
 
 		while (!recipient.equals("end")) {
 			System.out.println("Enter recipient or 'end' to continue: ");
-		    recipient = scanner.nextLine();
-		    
+			recipient = scanner.nextLine();
+
 			if (!recipient.equals("end")) {
 				recipientList.add(recipient);
 			}
 		}
-		
+
 		scanner.close();
 
 		String[] recipients = new String[recipientList.size()];
