@@ -36,7 +36,7 @@
       
     </ul>
     
-    <button class="btn btn-danger navbar-btn navbar-right" id="compose_button"><span class="glyphicons glyphicon-envelope"></span> Compose</button>
+    <button class="btn btn-danger navbar-btn navbar-right" id="compose_button" onClick="CreateNewEmail.jsp"><span class="glyphicons glyphicon-envelope"></span> Compose</button>
   </div>
 </nav>
   
