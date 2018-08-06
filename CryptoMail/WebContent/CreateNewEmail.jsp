@@ -71,5 +71,22 @@
 </head>
 <body>
 
+<% 
+	 String sender = request.getParameter("sender");
+	 String recipient = request.getParameter("recipient");
+	 String subject = request.getParameter("subject");
+	 String body = request.getParameter("body");
+	 
+try {
+	Class.forName("com.mysql.jdbc.Driver");
+	Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cryptomail");
+	Statement stmt = conn.createStatement();
+	
+	stmt.executeUpdate("insert into email"(sender,recipient,subject,body) values ('"+sender+"','"+recipient+"','"+subject'",'"+body+"')");
+}
+
+%>
+
+
 </body>
 </html>
