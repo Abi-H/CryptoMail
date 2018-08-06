@@ -9,14 +9,16 @@ public class Database {
 	String uname;
 	String password;
 	
-	public Database() {
+	public Database() throws ClassNotFoundException {
 		this.dbUrl = "jdbc:mysql://localhost:3306/cryptomail";
 		this.uname = "root";
 		this.password = "";
+		
 	}
 	
 	
-	public void read(String username) throws SQLException {
+	public void read(String username) throws SQLException, ClassNotFoundException {
+		Class.forName("com.mysql.cj.jdbc.Driver"); 
 		Connection conn = DriverManager.getConnection(dbUrl, uname, password);
 		System.out.println("DB connection successful");
 		Statement stmt = conn.createStatement();
@@ -31,7 +33,8 @@ public class Database {
 		conn.close();
 	}
 	
-	public void write(String sender, String recipient, String subject, String body, Date date) throws SQLException {
+	public void write(String sender, String recipient, String subject, String body, Date date) throws SQLException, ClassNotFoundException {
+		Class.forName("com.mysql.cj.jdbc.Driver"); 
 		Connection conn = DriverManager.getConnection(dbUrl, uname, password);
 		System.out.println("DB connection successful");
 		

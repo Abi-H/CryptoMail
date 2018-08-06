@@ -36,23 +36,13 @@ public class LoginInterface {
 			System.out.println("Successful login************************************************************");
 			MailService service = new MailService();
 			service.storeEmails(email, password);
-			uri = UriBuilder.fromPath(context.getContextPath() + "/" + email + "/View_Email.jsp").build();
+			uri = UriBuilder.fromPath(context.getContextPath() + "/View_Email.jsp").build();
 
 			return Response.seeOther(uri).build();
 		} else {
 			System.out.println("Login failure***********************************************");
-			// uri = UriBuilder.fromPath(context.getContextPath() +
-			// "/LoginPage.jsp").build();
-			// uri = UriBuilder.fromPath(context.getContextPath() + "/View_Email.jsp" +
-			// "?user=" + email).build();
-			
-			//The following lines are included because login isn't working at the moment. They will be removed once login is working
-			//**************************************************************************
-			MailService service = new MailService();
-			service.storeEmails(email, password);
-			uri = UriBuilder.fromPath(context.getContextPath() + "/View_Email.jsp").build();
+			uri = UriBuilder.fromPath(context.getContextPath() + "/LoginPage.jsp").build();
 			return Response.seeOther(uri).build();
-			//********************************************************************************
 		}
 
 	}

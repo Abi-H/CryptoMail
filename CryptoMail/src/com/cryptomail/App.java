@@ -12,7 +12,7 @@ public class App {
 	static String username;
 	static String password;
 
-	public static void main(String[] args) throws MessagingException, IOException, SQLException {
+	public static void main(String[] args) throws MessagingException, IOException, SQLException, ClassNotFoundException {
 		
 		login();
 		printMenu();
@@ -43,7 +43,7 @@ public class App {
 		}
 	}
 	
-	public static void storeEmails() throws MessagingException, IOException, SQLException {
+	public static void storeEmails() throws MessagingException, IOException, SQLException, ClassNotFoundException {
 		MailService mailService = new MailService();
 		//mailService.login("imap.gmail.com", username, password);
 		mailService.storeEmails(username, password);

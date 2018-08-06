@@ -100,7 +100,7 @@ public class MailService {
 		}
 	}
 
-	public void storeEmails(String username, String password) throws MessagingException, IOException, SQLException {
+	public void storeEmails(String username, String password) throws MessagingException, IOException, SQLException, ClassNotFoundException {
 		Database db = new Database();
 
 		login("imap.gmail.com", username, password);
