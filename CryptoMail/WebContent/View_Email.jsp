@@ -16,6 +16,7 @@
   </head>
   <body>
   <%@include file="header.jsp" %>
+  <%@ page import="java.sql.*" %>
   <script src="js/jquery.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
      
@@ -50,29 +51,30 @@
         </tr>
     </thead>
     <tbody>
-    
-		  <tr class="unread_message">
-            <td><div class="checkbox checkbox-warning"><input type="checkbox" id="checkbox1" class="styled"><label></label></div></td>
-            <td>Mark</td>
-            <td>13.03.2018</td>
-            <td>Fresh message</td>
-        </tr>
-            
-        <tr>
-            <td><div class="checkbox checkbox-warning"><input type="checkbox" id="checkbox2" class="styled"><label></label></div></td>
-            <td>John</td>
-            <td>13.01.2018</td>
-            <td>Not so important message</td>
-        </tr>
-        <tr>
-            <td><div class="checkbox checkbox-success"><input type="checkbox" id="checkbox3 class="styled""><label></label></div></td>
-            <td>Peter</td>
-            <td>12.01.2018</td>
-            <td>Very important message</td>
-        </tr>
+    	<%
+    	String email = "abi.cryptomail@gmail.com";
+    	String dbUrl = "jdbc:mysql://localhost:3306/cryptomail";
+    	String uname = "root";
+    	String password = "";
+    	Class.forName("com.mysql.cj.jdbc.Driver"); 
+		Connection conn = DriverManager.getConnection(dbUrl, uname, password);
+		Statement stmt = conn.createStatement();
+		String sql = "SELECT * FROM emails WHERE recipient = '" + email + "'";
+		ResultSet resultSet = stmt.executeQuery(sql);  	
+    	%>
+  	
+		<% while(resultSet.next()){ %>
+				<tr>
+				<td><div class="checkbox checkbox-warning"><input type="checkbox" id="checkbox1" class="styled"><label></label></div></td>
+				<td>  <%= resultSet.getString(1) %></td>
+				<td>  <%= resultSet.getString(5) %></td>
+				<td>  <%= resultSet.getString(3) %></td>
+				<td>  <%= resultSet.getString(4) %></td>
+				</tr>
+		<%} %>
+		   
     </tbody>
 </table>
-</div></div></div>
 
 </body>
 </html>

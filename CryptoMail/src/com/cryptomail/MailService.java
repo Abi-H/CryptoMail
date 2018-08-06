@@ -78,28 +78,6 @@ public class MailService {
 		return folder.getMessages();
 	}
 
-	public void viewEmails(String username, String password) throws MessagingException {
-		MailService mailService = new MailService();
-
-		mailService.login("imap.gmail.com", username, password);
-
-		int messageCount = mailService.getMessageCount();
-		Message[] messages = mailService.getMessages();
-
-		for (int i = 0; i < messageCount; i++) {
-			System.out.print("\n" + (i + 1) + " - ");
-
-			if (messages[i].getFrom() != null) {
-				System.out.print(messages[i].getFrom()[0]);
-			}
-
-			if (messages[i].getSubject() != null) {
-				System.out.print(" > ");
-				System.out.print(messages[i].getSubject());
-			}
-		}
-	}
-
 	public void storeEmails(String username, String password) throws MessagingException, IOException, SQLException, ClassNotFoundException {
 		Database db = new Database();
 
@@ -143,7 +121,7 @@ public class MailService {
 	            
 	            if (bodyPart.isMimeType("text/plain")){
 	                result = result + "\n" + bodyPart.getContent();
-	                break;  //without break same text appears twice
+	                break;  //without breaking the text appears twice
 	                
 	            } else if (bodyPart.isMimeType("text/html")){
 	                String html = (String) bodyPart.getContent();
@@ -155,32 +133,8 @@ public class MailService {
 	    return "";
 	}
 
-	public void composeEmail(String sender, String password) {
-		Scanner scanner = new Scanner(System.in);
-		ArrayList<String> recipientList = new ArrayList<>();
-
-		System.out.println("Enter subject: ");
-		String subject = scanner.nextLine();
-		System.out.println("Enter message: ");
-		String body = scanner.nextLine();
-		String recipient = "";
-
-		while (!recipient.equals("end")) {
-			System.out.println("Enter recipient or 'end' to continue: ");
-			recipient = scanner.nextLine();
-
-			if (!recipient.equals("end")) {
-				recipientList.add(recipient);
-			}
-		}
-
-		scanner.close();
-
-		String[] recipients = new String[recipientList.size()];
-
-		for (int i = 0; i < recipients.length; i++) {
-			recipients[i] = recipientList.get(i);
-		}
+	public void composeEmail(String sender, String password, String recipient, String subject, String body) {
+		String[] recipients = {recipient};
 
 		Email email = new Email(sender, recipients, password);
 		email.createEmail(subject, body);

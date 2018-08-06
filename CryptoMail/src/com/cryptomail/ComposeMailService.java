@@ -10,6 +10,6 @@ import javax.ws.rs.core.*;
 
 @Path("mail")
 
-public class MailInterface {
+public class ComposeMailService {
 
 }

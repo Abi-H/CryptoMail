@@ -19,17 +19,11 @@
   <script src="js/jquery.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
 
-<form class="form-horizontal" role="form" method="post" action="#">
+<form class="form-horizontal" role="form" method="post" action="${pageContext.request.contextPath}/cryptomail/send">
 	<div class="form-group">
 		<label for="name" class="col-sm-2 control-label">To:</label>
 		<div class="col-sm-10">
 			<input type="email" class="form-control" id="to" name="to"  value="">
-		</div>
-	</div>
-	<div class="form-group">
-		<label for="from" class="col-sm-2 control-label">From:</label>
-		<div class="col-sm-10">
-			<input type="email" class="form-control" id="from" name="from" value="">
 		</div>
 	</div>
 	
@@ -61,7 +55,7 @@
 	
 	<div class="form-group">
 		<div class="col-sm-10 col-sm-offset-2">
-			<input id="submit" name="Submit_Email" type="submit" value="Send" class="btn btn-primary">
+			<input id="submit" name="Submit_Email" type="submit" value="Send" class="btn btn-primary" >
 		</div>
 	</div>
 	<div class="form-group">

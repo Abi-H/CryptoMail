@@ -26,7 +26,7 @@ public class Database {
 		ResultSet resultSet = stmt.executeQuery(sql);
 		
 		while (resultSet.next()) {
-			System.out.println(resultSet.getString("recipient") + ", " + resultSet.getString("subject"));
+			//System.out.println(resultSet.getString("recipient") + ", " + resultSet.getString("subject"));
 		}
 
 		stmt.close();
@@ -59,5 +59,31 @@ public class Database {
 	
 	public void delete(String sender, String recipient, String subject, String body, Date date) {
 		
+	}
+	
+	public String retrievePassword(String username) {
+		final String dbUrl = "jdbc:mysql://localhost:3306/cryptomail";
+		final String uname = "root";
+		final String password = "";
+
+		try {
+			System.out.println("Starting database**************************************");
+			Connection conn = DriverManager.getConnection(dbUrl, uname, password);
+
+			PreparedStatement preparedStmt = conn.prepareStatement("SELECT username,password FROM users WHERE username=?");
+			preparedStmt.setString(1, username);
+			ResultSet rs = preparedStmt.executeQuery();
+
+			if (rs.next()) {
+				System.out.println("Password found");
+				String result = rs.getString("password");
+				return result;
+			} 		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println("Password not found");
+		return "";
 	}
 }

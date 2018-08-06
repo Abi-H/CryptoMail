@@ -18,7 +18,7 @@ import javax.ws.rs.core.*;
 
 @Path("login")
 
-public class LoginInterface {
+public class LoginService {
 
 	@Context
 	private ServletContext context;
