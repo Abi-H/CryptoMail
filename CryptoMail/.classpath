@@ -16,5 +16,6 @@
 	<classpathentry kind="lib" path="C:/Users/abiga/eclipse-workspace/CryptoMail/src/com/cryptomail/javax.mail-1.5.0.jar"/>
 	<classpathentry kind="lib" path="C:/Users/abiga/eclipse-workspace/IT7374_Study/src/mysql-connector-java-8.0.11.jar"/>
 	<classpathentry kind="lib" path="C:/Users/abiga/eclipse-workspace/CryptoMail/src/com/cryptomail/jsoup-1.11.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/abiga/eclipse-workspace/CryptoMail/src/com/cryptomail/httpclient-4.2.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

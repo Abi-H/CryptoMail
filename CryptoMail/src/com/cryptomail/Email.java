@@ -25,6 +25,9 @@ public class Email {
 	}
 
 	public void createEmail(String subject, String body) {
+		System.out.println("Email username: " + sender);
+		System.out.println("Email password: " + password);
+		System.out.println("Creating email...");
 		Properties props = new Properties();
 		props.put("mail.smtp.host", host);
 		props.put("mail.smtp.port", port);

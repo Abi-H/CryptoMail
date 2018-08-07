@@ -10,7 +10,6 @@ public class Database {
 	String dbUrl;
 	String uname;
 	String password;
-	//HashMap<Integer, String> fields = new HashMap<>();
 	ArrayList<String> fields;
 
 	public Database() throws ClassNotFoundException {
@@ -28,7 +27,6 @@ public class Database {
 		String sql = "INSERT INTO emails" + " (sender, recipient, subject, body, date) VALUES (?, ?, ?, ?, ?)";
 		PreparedStatement preparedStmt = conn.prepareStatement(sql);
 
-		// Set parameter values
 		preparedStmt.setString(1, sender);
 		preparedStmt.setString(2, recipient);
 		preparedStmt.setString(3, subject);
@@ -72,20 +70,12 @@ public class Database {
 		String dbUrl = "jdbc:mysql://localhost:3306/cryptomail";
 		String uname = "root";
 		String password = "";
+		
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		Connection conn = DriverManager.getConnection(dbUrl, uname, password);
 		Statement stmt = conn.createStatement();
 		String sql = "SELECT * FROM emails WHERE recipient = '" + email + "'";
 		ResultSet resultSet = stmt.executeQuery(sql);
-		int i = 0;
-
-		/*while (resultSet.next()) {
-			fields.put("sender", resultSet.getString(1));
-			fields.put("date", resultSet.getString(5));
-			fields.put("subject", resultSet.getString(3));
-			fields.put("body", resultSet.getString(4));
-			i++;
-		}*/
 		
 		while(resultSet.next()) {
 			fields.add(resultSet.getString(1));
@@ -95,7 +85,7 @@ public class Database {
 		}
 	}
 	
-	public ArrayList getFields() {
+	public ArrayList<String> getFields() {
 		return fields;
 	}
 }

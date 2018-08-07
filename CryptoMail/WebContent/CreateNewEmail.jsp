@@ -1,5 +1,6 @@
 <%@ page language="java" %>
 <!DOCTYPE html>
+<% System.out.println("Session name from Create is: " + session.getAttribute("username")); %>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -19,7 +20,10 @@
   <script src="js/jquery.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
 
-<form class="form-horizontal" role="form" method="post" action="${pageContext.request.contextPath}/cryptomail/send">
+<form class="form-horizontal" role="form" method="GET" action="${pageContext.request.contextPath}/cryptomail/send">
+
+	<input type="hidden" name="username" value="<%= session.getAttribute("username") %>">
+
 	<div class="form-group">
 		<label for="name" class="col-sm-2 control-label">To:</label>
 		<div class="col-sm-10">
@@ -40,19 +44,7 @@
 			<textarea class="form-control" rows="4" name="message"></textarea>
 		</div>
 	</div>
-	
-	
-	<div class="form-group">
-	<label class="col-sm-2 control-label" for="inputGroupFile01">Choose file:</label>
-		<div class="col-sm-10 col-sm-offset-2">
-			<div class="custom-file">
-    <input type="file" class="custom-file-input" id="inputGroupFile01" name="File_Attachment">
-    
-  </div>
-</div>
-</div>
-	
-	
+    	
 	<div class="form-group">
 		<div class="col-sm-10 col-sm-offset-2">
 			<input id="submit" name="Submit_Email" type="submit" value="Send" class="btn btn-primary" >

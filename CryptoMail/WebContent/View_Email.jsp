@@ -1,12 +1,17 @@
 <%@ page language="java" %>
 <!DOCTYPE html>
+<%
+   String name = request.getParameter("name");
+	System.out.println("Session name is " + name);
+   session.setAttribute( "username", name );
+%>
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Welcome to the CryptoMail, <%= session.getAttribute( "username" ) %>!</title>
+    <title>Welcome to the CryptoMail, <%= session.getAttribute("name") %>!</title>
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
      <link href="css/awesome-bootstrap-checkbox.css" rel="stylesheet">
@@ -38,7 +43,7 @@
       
     </ul>
     
-    <button class="btn btn-danger navbar-btn navbar-right" id="compose_button" onClick="CreateNewEmail.jsp"><span class="glyphicons glyphicon-envelope"></span> Compose</button>
+    <button class="btn btn-danger navbar-btn navbar-right" id="compose_button" onClick="JavaScript:window.location='CreateNewEmail.jsp?';"><span class="glyphicons glyphicon-envelope"></span> Compose</button>
   </div>
 </nav>
   
@@ -55,21 +60,21 @@
     <tbody>
     	<%   	
 	    	Database db = new Database();
-    		db.read("abi.cryptomail@gmail.com");
+    		db.read(name);
 	    	ArrayList<String> fields = db.getFields();
 	    	System.out.println("Size of fields is " + fields.size());
 	    	String entry;
 	    	
-	    	for(int i = 0; i < fields.size(); i+=4){%>
+	    	for(int i = 0; i < fields.size(); i++){%>
 	    	    <tr>
 	            <td><div class="checkbox checkbox-warning"><input type="checkbox" id="checkbox2" class="styled"><label></label></div></td>
-	            <% entry = fields.get(i); %>
+	            <% entry = fields.get(i++); %>
 	            <td><%=entry %> </td>
-	            <% entry = fields.get(i+1); %>
+	            <% entry = fields.get(i++); %>
 	            <td><%=entry %></td>
-	            <% entry = fields.get(i+2); %>
+	            <% entry = fields.get(i++); %>
 	            <td><%=entry %></td>
-	            <% entry = fields.get(i+3); %>
+	            <% entry = fields.get(i); %>
 	            <td><%=entry %></td>
 	        </tr> 
 	        <%}%>

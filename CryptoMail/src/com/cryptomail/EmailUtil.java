@@ -10,15 +10,9 @@ import javax.mail.internet.MimeMessage;
 public class EmailUtil {
 	
 	private static String sender;
-	private String recipient;
-	private String subject;
-	private String body;
 	
-	public EmailUtil(String sender, String recipient, String subject, String body) {
+	public EmailUtil(String sender) {
 		EmailUtil.sender = sender;
-		this.recipient = recipient;
-		this.subject = subject;
-		this.body = body;
 	}
 
 	public static void sendEmail(Session session, String[] recipients, String subject, String body) {

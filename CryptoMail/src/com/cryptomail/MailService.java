@@ -134,8 +134,9 @@ public class MailService {
 	}
 
 	public void composeEmail(String sender, String password, String recipient, String subject, String body) {
+		System.out.println("Mail Service is composing a message...");
 		String[] recipients = {recipient};
-
+		
 		Email email = new Email(sender, recipients, password);
 		email.createEmail(subject, body);
 	}
