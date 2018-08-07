@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Welcome to the Crypto Email, <%= session.getAttribute( "username" ) %>!</title>
+    <title>Welcome to the CryptoMail, <%= session.getAttribute( "username" ) %>!</title>
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
      <link href="css/awesome-bootstrap-checkbox.css" rel="stylesheet">
@@ -17,6 +17,8 @@
   <body>
   <%@include file="header.jsp" %>
   <%@ page import="java.sql.*" %>
+  <%@ page import="com.cryptomail.Database" %>
+  <%@ page import="java.util.*" %>
   <script src="js/jquery.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
      
@@ -36,9 +38,7 @@
       
     </ul>
     
-    <button class="btn btn-danger navbar-btn navbar-right" id="compose_button" onClick="JavaScript:window.location='CreateNewEmail.jsp';"><span class="glyphicons glyphicon-envelope"></span> Compose</button>
-    
-    
+    <button class="btn btn-danger navbar-btn navbar-right" id="compose_button" onClick="CreateNewEmail.jsp"><span class="glyphicons glyphicon-envelope"></span> Compose</button>
   </div>
 </nav>
   
@@ -53,27 +53,27 @@
         </tr>
     </thead>
     <tbody>
-    	<%
-    	String email = "abi.cryptomail@gmail.com";
-    	String dbUrl = "jdbc:mysql://localhost:3306/cryptomail";
-    	String uname = "root";
-    	String password = "";
-    	Class.forName("com.mysql.cj.jdbc.Driver"); 
-		Connection conn = DriverManager.getConnection(dbUrl, uname, password);
-		Statement stmt = conn.createStatement();
-		String sql = "SELECT * FROM emails WHERE recipient = '" + email + "'";
-		ResultSet resultSet = stmt.executeQuery(sql);  	
-    	%>
-  	
-		<% while(resultSet.next()){ %>
-				<tr>
-				<td><div class="checkbox checkbox-warning"><input type="checkbox" id="checkbox1" class="styled"><label></label></div></td>
-				<td>  <%= resultSet.getString(1) %></td>
-				<td>  <%= resultSet.getString(5) %></td>
-				<td>  <%= resultSet.getString(3) %></td>
-				<td>  <%= resultSet.getString(4) %></td>
-				</tr>
-		<%} %>
+    	<%   	
+	    	Database db = new Database();
+    		db.read("abi.cryptomail@gmail.com");
+	    	ArrayList<String> fields = db.getFields();
+	    	System.out.println("Size of fields is " + fields.size());
+	    	String entry;
+	    	
+	    	for(int i = 0; i < fields.size(); i+=4){%>
+	    	    <tr>
+	            <td><div class="checkbox checkbox-warning"><input type="checkbox" id="checkbox2" class="styled"><label></label></div></td>
+	            <% entry = fields.get(i); %>
+	            <td><%=entry %> </td>
+	            <% entry = fields.get(i+1); %>
+	            <td><%=entry %></td>
+	            <% entry = fields.get(i+2); %>
+	            <td><%=entry %></td>
+	            <% entry = fields.get(i+3); %>
+	            <td><%=entry %></td>
+	        </tr> 
+	        <%}%>
+	    	
 		   
     </tbody>
 </table>

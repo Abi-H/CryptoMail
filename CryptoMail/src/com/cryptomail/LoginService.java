@@ -37,6 +37,7 @@ public class LoginService {
 			MailService service = new MailService();
 			service.storeEmails(email, password);
 			uri = UriBuilder.fromPath(context.getContextPath() + "/View_Email.jsp").build();
+			//uri = UriBuilder.fromPath(context.getContextPath() + "/View_Email.jsp" +"?"+"name=" + email).build();
 
 			return Response.seeOther(uri).build();
 		} else {
